@@ -1,6 +1,9 @@
-
 pipeline {
   agent any
+  tools {
+    // Install Maven
+    maven 'M398'
+  }
   stages {
     stage('Build') {
       steps {
@@ -15,7 +18,7 @@ pipeline {
         junit(testResults: 'target/surefire-reports/TEST-*.xml', keepProperties: true, keepTestNames: true)
       }
     }
-    
+
     stage('Containerization') {
       steps {
         sh 'echo Docker Build Image..'
@@ -29,7 +32,7 @@ pipeline {
         sh 'echo Deploy to Kubernetes using ArgoCD'
       }
     }
-    
+
     stage('Integration Testing') {
       steps {
         sh "sleep 10s"
@@ -37,9 +40,5 @@ pipeline {
       }
     }
   }
-  tools {
-   // Install Maven
-   maven 'M398'
 }
 
-}
