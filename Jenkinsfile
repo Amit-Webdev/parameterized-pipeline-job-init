@@ -38,7 +38,8 @@ pipeline {
     }
   }
   tools {
-    maven 'M398'
-  }
+   // Install Maven
+   maven 'M398'
+}
 
 }
